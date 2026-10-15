@@ -1,0 +1,53 @@
+﻿@model ProjetoCarros.Models.Usuario
+
+<div class="container mt-5">
+
+    <div class="text-center mb-4">
+        <i class="bi bi-person-circle"
+           style="font-size:80px;"></i>
+    </div>
+
+    <div class="card shadow-sm p-4">
+
+        <h2 class="mb-1 text-dark">@Model.Nome</h2>
+        <p class="text-muted dark">@Model.Email</p>
+
+        <hr />
+
+        <form asp-action="EditarPerfil" method="post">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label class="form-label">Nome</label>
+                <input asp-for="Nome" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Nova Senha</label>
+                <input type="password"
+                       name="NovaSenha"
+                       class="form-control"
+                       placeholder="Digite apenas se desejar alterar" />
+            </div>
+
+            <button type="submit" class="btn btn-dark">
+                Salvar Alterações
+            </button>
+         
+
+            <a asp-action="DeletarConta"
+               class="btn btn-danger ms-2">
+                Excluir Conta
+            </a>
+
+        </form>
+
+    </div>
+
+</div>

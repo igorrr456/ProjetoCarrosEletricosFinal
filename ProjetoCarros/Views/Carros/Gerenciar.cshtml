@@ -1,0 +1,114 @@
+﻿@model List<ProjetoCarros.Models.Carro>
+@*
+    VIEW: Carros/Gerenciar.cshtml
+    MODEL: List<Carro> — todos os carros para o admin ver
+    FUNÇÃO: Painel administrativo. Tabela com botões de Editar e Deletar.
+    Protegida pelo [Authorize] no controller + verificação manual de "Admin".
+*@
+@{
+    ViewData["Title"] = "Gerenciar Carros";
+}
+
+<div class="section-header">
+    <div>
+        <div class="eyebrow">// painel admin</div>
+        <h1 class="page-title">Gerenciar carros</h1>
+        <p class="subtitle">@Model.Count carro(s) cadastrado(s) no sistema</p>
+    </div>
+    <!-- Botão de criar novo carro — ação principal da tela -->
+    <a asp-action="Criar" class="btn btn-primary">+ Novo carro</a>
+</div>
+
+@if (Model.Count == 0)
+{
+    <div class="empty-state">
+        <div class="empty-icon">[ ]</div>
+        <p>Nenhum carro cadastrado ainda.</p>
+        <a asp-action="Criar" class="btn btn-primary" style="margin-top:1rem">Cadastrar primeiro carro</a>
+    </div>
+}
+else
+{
+    <!--
+        TABELA ADMIN
+        Cada linha tem: imagem thumbnail, nome, marca, categoria, preço e ações.
+        O botão Deletar usa um <form> com POST + AntiForgeryToken para segurança
+        — nunca delete com GET, pois qualquer link poderia acionar a exclusão.
+    -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Imagem</th>
+                    <th>Nome</th>
+                    <th>Marca</th>
+                    <th>Categoria</th>
+                    <th>Preço</th>
+                    <th>Cadastro</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var carro in Model)
+                {
+                    <tr>
+                        <!-- Thumbnail da imagem -->
+                        <td>
+                            @if (!string.IsNullOrEmpty(carro.Imagem))
+                            {
+                                <img src="@carro.Imagem" alt="@carro.Nome"
+                                     style="width:64px;height:44px;object-fit:cover;
+                                border-radius:4px;border:1px solid var(--border)" />
+                            }
+                            else
+                            {
+                                <div style="width:64px;height:44px;background:var(--border);
+                                    border-radius:4px;display:flex;align-items:center;
+                                    justify-content:center;color:var(--muted);font-size:0.6rem">
+                                    N/A
+                                </div>
+                            }
+                        </td>
+
+                        <td style="font-weight:500">@carro.Nome</td>
+                        <td style="color:var(--muted)">@carro.Marca</td>
+
+                        <td>
+                            <!-- Badge de categoria com cor dinâmica -->
+                            <span class="badge badge-@carro.Categoria">@carro.Categoria</span>
+                        </td>
+
+                        <td style="font-family:'JetBrains Mono',monospace;color:var(--accent)">
+                            @carro.Preco.ToString("C", new System.Globalization.CultureInfo("pt-BR"))
+                        </td>
+
+                        <td style="color:var(--muted);font-size:0.8rem">
+                            <!-- Só a data, sem hora -->
+                            @carro.DataCadastro.ToString("dd/MM/yyyy")
+                        </td>
+
+                        <td>
+                            <div class="td-actions">
+                                <!-- EDITAR: GET com o id do carro na URL -->
+                                <a asp-action="Editar" asp-route-id="@carro.Id"
+                                   class="btn btn-outline btn-sm">Editar</a>
+
+                                <!--
+                                    DELETAR: POST com AntiForgeryToken.
+                                    O confirm() do JS evita exclusão acidental.
+                                    asp-route-id passa o Id do carro para o controller.
+                                -->
+                                <form asp-action="Deletar" asp-route-id="@carro.Id"
+                                      method="post" style="display:inline"
+                                      onsubmit="return confirm('Remover @Html.Raw(carro.Nome.Replace("'", "\\'") ?? "")? Esta ação não pode ser desfeita.')">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger btn-sm">Remover</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -1,0 +1,112 @@
+@model List<ProjetoCarros.Models.Carro>
+@{
+    ViewData["Title"] = "Simule seu Financiamento";
+}
+
+<link rel="stylesheet" href="~/css/financiamento.css" />
+
+<section class="financiamento-hero">
+    <div class="container">
+        <h1>Simule o Financiamento do seu Carro</h1>
+        <p>Escolha o modelo, ajuste a entrada e o número de parcelas e veja o valor na hora.</p>
+    </div>
+</section>
+
+<section class="financiamento-container container">
+    <div class="financiamento-card">
+
+        <div class="form-group">
+            <label for="selectCarro">Escolha o carro</label>
+            <select id="selectCarro" class="form-select">
+                <option value="">Selecione um modelo</option>
+                @foreach (var carro in Model)
+                {
+                    var selecionado = ViewBag.CarroSelecionadoId != null && carro.Id == (int)ViewBag.CarroSelecionadoId;
+                    <option value="@carro.Id"
+                            data-nome="@carro.Nome"
+                            data-marca="@carro.Marca"
+                            data-preco="@carro.Preco.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                            data-imagem="@carro.Imagem"
+                            selected="@(selecionado ? "selected" : null)">
+                        @carro.Marca @carro.Nome
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div id="carroPreview" class="carro-preview d-none">
+            <img id="previewImagem" src="" alt="" />
+            <div>
+                <h3 id="previewNome"></h3>
+                <span id="previewPreco"></span>
+            </div>
+        </div>
+
+        <div id="financiamentoForm" class="d-none">
+
+            <div class="form-group">
+                <label for="rangeEntrada">
+                    Entrada: <span id="valorEntradaLabel">R$ 0,00</span>
+                    (<span id="percentEntradaLabel">20</span>%)
+                </label>
+                <input type="range" id="rangeEntrada" min="10" max="90" value="20" step="1" />
+            </div>
+
+            <div class="form-group">
+                <label for="rangeParcelas">
+                    Parcelas: <span id="valorParcelasLabel">48x</span>
+                </label>
+                <input type="range" id="rangeParcelas" min="12" max="60" value="48" step="12" />
+                <div class="range-marks">
+                    <span>12x</span>
+                    <span>24x</span>
+                    <span>36x</span>
+                    <span>48x</span>
+                    <span>60x</span>
+                </div>
+            </div>
+
+            <div class="resultado-financiamento">
+                <table class="tabela-financiamento">
+                    <tbody>
+                        <tr>
+                            <td>Valor do veículo</td>
+                            <td id="resValorCarro">R$ 0,00</td>
+                        </tr>
+                        <tr>
+                            <td>Entrada</td>
+                            <td id="resEntrada">R$ 0,00</td>
+                        </tr>
+                        <tr>
+                            <td>Valor financiado</td>
+                            <td id="resFinanciado">R$ 0,00</td>
+                        </tr>
+                        <tr>
+                            <td>Taxa de juros</td>
+                            <td>1,99% a.m.</td>
+                        </tr>
+                        <tr class="destaque">
+                            <td>Parcela mensal</td>
+                            <td id="resParcela">R$ 0,00</td>
+                        </tr>
+                        <tr>
+                            <td>Total pago ao final</td>
+                            <td id="resTotal">R$ 0,00</td>
+                        </tr>
+                        <tr>
+                            <td>Total de juros</td>
+                            <td id="resJuros">R$ 0,00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="aviso-financiamento">
+                * Simulação aproximada utilizando Tabela Price. Valores sujeitos a análise de crédito.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<script src="~/js/financiamento.js"></script>

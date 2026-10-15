@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Carregamento Veículo Elétrico";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="~/css/carregamento.css" asp-append-version="true" />
+}
+
+
+<section class="carregamento-intro-section">
+    <div class="container">
+        <h1 class="carregamento-titulo">CARREGAMENTO VEÍCULO ELÉTRICO</h1>
+        <p class="carregamento-subtexto">
+            Explore as soluções de carregamento disponíveis e o compromisso da ETEC Motors em
+            tornar o carregamento de veículos elétricos simples e sem complicações.
+        </p>
+
+        <div class="row carregamento-imagens g-3">
+            <div class="col-12 col-md-6">
+                <img src="~/images/Interiocarro.webp" alt="Painel do veículo elétrico" class="carregamento-img">
+            </div>
+            <div class="col-12 col-md-6">
+                <img src="~/images/Carregamento.webp" alt="Carregamento do veículo elétrico" class="carregamento-img">
+            </div>
+        </div>
+
+
+        <div class="row carregamento-tipos g-4">
+            <div class="col-12 col-md-4">
+                <h3 class="carregamento-tipo-titulo">CARREGADOR WALLBOX</h3>
+                <p class="carregamento-tipo-texto">
+                    O Wallbox residencial mantém seu carro sempre pronto, com conveniência e
+                    segurança para recarregar em casa todos os dias.
+                </p>
+            </div>
+            <div class="col-12 col-md-4">
+                <h3 class="carregamento-tipo-titulo">CARREGADOR PÚBLICO</h3>
+                <p class="carregamento-tipo-texto">
+                    Estações públicas estão disponíveis em diversos pontos, com carregadores AC
+                    e DC de múltiplas potências, garantindo recargas rápidas.
+                </p>
+            </div>
+            <div class="col-12 col-md-4">
+                <h3 class="carregamento-tipo-titulo">CARREGADOR PORTÁTIL</h3>
+                <p class="carregamento-tipo-texto">
+                    Carregador que acompanha o carro, permite recarga em tomadas comuns de 20A,
+                    ideal para situações inesperadas.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="carregamento-mapa-section">
+    <div class="container">
+        <h2 class="carregamento-mapa-titulo">MAPA DE REDE DE CARREGAMENTO</h2>
+    </div>
+
+    <div id="mapaCarregamento"></div>
+</section>
+
+@section Scripts {
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="~/js/carregamento.js" asp-append-version="true"></script>
+}

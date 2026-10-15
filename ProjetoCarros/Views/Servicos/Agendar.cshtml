@@ -1,0 +1,121 @@
+ @{
+    ViewData["Title"] = "Agendar Test-Drive";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/agendar.css" />
+
+<div class="ag-container">
+
+    <div class="ag-header">
+        <h1>Agendar Test-Drive</h1>
+        <p>Escolha o melhor dia e horário pra conhecer seu próximo ETEC Motors</p>
+    </div>
+
+    <div class="ag-steps">
+        <div class="ag-step-circle active" id="circle-1">1</div>
+        <div class="ag-step-line" id="line-1"></div>
+        <div class="ag-step-circle" id="circle-2">2</div>
+        <div class="ag-step-line" id="line-2"></div>
+        <div class="ag-step-circle" id="circle-3">3</div>
+    </div>
+
+    <div class="ag-card">
+
+        <!-- PASSO 1: DATA E HORÁRIO -->
+        <div class="ag-panel" id="panel-1">
+            <h2 class="text-black">Passo 1 de 3</h2>
+            <p class="ag-subtitle">Escolha o dia e horário disponível</p>
+
+            <div class="ag-dates-row text-black">
+                <button type="button" class="ag-arrow" id="datesPrev">&#8592;</button>
+                <div class="ag-dates-scroll" id="datesScroll"></div>
+                <button type="button" class="ag-arrow" id="datesNext">&#8594;</button>
+            </div>
+
+            <h3 class="ag-horario-title text-black">Escolha o Horário</h3>
+            <div class="ag-horarios-grid" id="horariosGrid"></div>
+
+            <div class="ag-actions">
+                <span></span>
+                <button type="button" class="ag-btn-primary" id="btnStep1Next" disabled>Próximo &#8594;</button>
+            </div>
+        </div>
+
+        <!-- PASSO 2: LOGIN -->
+        <div class="ag-panel d-none" id="panel-2">
+            <h2 class="text-black">Passo 2 de 3</h2>
+            <p class="ag-subtitle">Faça login para confirmar seu agendamento</p>
+
+            <div class="ag-resumo">
+                <span id="resumoData"></span> às <span id="resumoHorario"></span>
+            </div>
+
+            <form id="loginForm">
+                <div class="ag-field">
+                    <label class="text-black">Email </label>
+                    <input type="email" id="loginEmail" placeholder="seu@email.com" required />
+                </div>
+                <div class="ag-field">
+                    <label class="text-black">Senha </label>
+                    <input type="password" id="loginSenha" placeholder="Sua senha" required />
+                </div>
+
+                <div id="loginErro" class="ag-erro d-none"></div>
+
+                <div class="ag-actions">
+                    <button type="button" class="ag-btn-secondary" id="btnStep2Back">&#8592; Voltar</button>
+                    <button type="submit" class="ag-btn-primary">Entrar e Confirmar &#8594;</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- PASSO 3: CONFIRMAÇÃO -->
+        <div class="ag-panel d-none" id="panel-3">
+            <div class="ag-confirm-card">
+                <div class="ag-confirm-icon">&#10003;</div>
+                <h2 class="ag-confirm-title">Agendamento confirmado!</h2>
+                <p class="ag-confirm-protocol">Protocolo #<span id="confProtocolo"></span></p>
+
+                <div class="ag-confirm-divider"></div>
+
+                <div class="ag-confirm-row">
+                    <div class="ag-confirm-icon-sm">&#128205;</div>
+                    <div>
+                        <div class="ag-confirm-label">Unidade</div>
+                        <div class="ag-confirm-value" id="confUnidade">São Paulo — R. Guaipá, 678</div>
+                    </div>
+                </div>
+
+                <div class="ag-confirm-row">
+                    <div class="ag-confirm-icon-sm">&#128197;</div>
+                    <div>
+                        <div class="ag-confirm-label">Data</div>
+                        <div class="ag-confirm-value" id="confData"></div>
+                    </div>
+                </div>
+
+                <div class="ag-confirm-row">
+                    <div class="ag-confirm-icon-sm">&#128336;</div>
+                    <div>
+                        <div class="ag-confirm-label">Horário</div>
+                        <div class="ag-confirm-value" id="confHorario"></div>
+                    </div>
+                </div>
+
+                <div class="ag-confirm-row">
+                    <div class="ag-confirm-icon-sm">&#128100;</div>
+                    <div>
+                        <div class="ag-confirm-label">Cliente</div>
+                        <div class="ag-confirm-value" id="confCliente"></div>
+                    </div>
+                </div>
+
+                <button type="button" class="ag-btn-novo" id="btnNovoAgendamento">&#8595; Fazer novo agendamento</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/Agendar.js"></script>

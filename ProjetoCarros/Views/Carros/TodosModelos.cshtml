@@ -1,0 +1,56 @@
+﻿@model List<ProjetoCarros.Models.Carro>
+
+@{
+	ViewData["Title"] = "Todos os carros";
+}
+
+<div class="container">
+	<div class="page-header">
+		<p class="page-label">Catálogo</p>
+		<h1 class="page-title">Todos os Modelos</h1>
+	</div>
+
+	@if (Model != null && Model.Any())
+	{
+		<div class="carros-grid">
+			@foreach (var carro in Model)
+			{
+				<div class="carro-card">
+					<div class="card-img-wrap">
+						@if (!string.IsNullOrEmpty(carro.Imagem))
+						{
+							<img src="@carro.Imagem" alt="@carro.Imagem" />
+						}
+						else
+						{
+							<div class="card-img-placeholder">
+								Sem Imagem
+							</div>
+						}
+						<span class="card-badge">@carro.Categoria</span>
+					</div>
+					<div class="card-body">
+						<span class="card-marca">@carro.Marca</span>
+						<span class="card-nome">@carro.Nome</span>
+						@if (!string.IsNullOrEmpty(carro.Descricao))
+						{
+							<p class="card-desc">@carro.Descricao</p>
+						}
+						<p class="card-preco">R$@carro.Preco.ToString("N2")<span>- 48x sem juros</span></p>
+					</div>
+					<form asp-action="Comprar" asp-controller="Carros" method="post" style="flex:1; margin:0;">
+						<input type="hidden" name="id" value="@carro.Id" />
+						@Html.AntiForgeryToken()
+						<button type="submit" class="btn-comprar w100">Comprar</button>
+					</form>
+				</div>
+			}
+		</div>
+	}
+	else
+	{
+		<div class="empty-state">
+			<p>Nenhum carro elétrico disponível no momento</p>
+		</div>
+	}
+</div>

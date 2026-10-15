@@ -1,0 +1,372 @@
+﻿/* ===== Container geral ===== */
+.ag-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 16px 80px;
+}
+
+.ag-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+    .ag-header h1 {
+        font-weight: 800;
+        font-size: 2rem;
+        margin-bottom: 6px;
+    }
+
+    .ag-header p {
+        color: #6b7280;
+        margin: 0;
+    }
+
+/* ===== Indicador de passos ===== */
+.ag-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 28px;
+}
+
+.ag-step-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: background .2s, color .2s;
+}
+
+    .ag-step-circle.active {
+        background: #111111;
+        color: #ffffff;
+    }
+
+    .ag-step-circle.done {
+        background: #111111;
+        color: #ffffff;
+    }
+
+.ag-step-line {
+    width: 60px;
+    height: 2px;
+    background: #e5e7eb;
+}
+
+    .ag-step-line.done {
+        background: #111111;
+    }
+
+/* ===== Card branco (passos 1 e 2) ===== */
+.ag-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 28px;
+}
+
+.ag-panel h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.ag-subtitle {
+    color: #6b7280;
+    font-size: .9rem;
+    margin-bottom: 20px;
+}
+
+/* ===== Seletor de datas ===== */
+.ag-dates-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.ag-dates-scroll {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+    .ag-dates-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+.ag-date-card {
+    flex: 0 0 auto;
+    min-width: 92px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    transition: border-color .15s, background .15s;
+}
+
+    .ag-date-card:hover {
+        border-color: #9ca3af;
+    }
+
+    .ag-date-card.selected {
+        border-color: #111111;
+        border-width: 2px;
+        background: #f9fafb;
+    }
+
+    .ag-date-card .ag-date-dia {
+        font-weight: 700;
+        font-size: .85rem;
+    }
+
+    .ag-date-card .ag-date-data {
+        color: #6b7280;
+        font-size: .78rem;
+        margin-top: 2px;
+    }
+
+.ag-arrow {
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    border-radius: 8px;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+}
+
+    .ag-arrow:hover {
+        background: #f3f4f6;
+    }
+
+/* ===== Grid de horários ===== */
+.ag-horario-title {
+    font-size: .95rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.ag-horarios-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 480px) {
+    .ag-horarios-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.ag-horario-btn {
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 6px;
+    font-weight: 600;
+    font-size: .9rem;
+    cursor: pointer;
+    transition: border-color .15s, background .15s, color .15s;
+}
+
+    .ag-horario-btn:hover {
+        border-color: #9ca3af;
+    }
+
+    .ag-horario-btn.selected {
+        background: #111111;
+        border-color: #111111;
+        color: #fff;
+    }
+
+/* ===== Ações (botões) ===== */
+.ag-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.ag-btn-primary {
+    background: #111111;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 22px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity .15s;
+}
+
+    .ag-btn-primary:disabled {
+        opacity: .4;
+        cursor: not-allowed;
+    }
+
+    .ag-btn-primary:hover:not(:disabled) {
+        opacity: .85;
+    }
+
+.ag-btn-secondary {
+    background: #fff;
+    color: #111111;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 11px 22px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .ag-btn-secondary:hover {
+        background: #f3f4f6;
+    }
+
+/* ===== Resumo (passo 2) ===== */
+.ag-resumo {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: .88rem;
+    color: #374151;
+    margin-bottom: 20px;
+}
+
+/* ===== Formulário de login ===== */
+.ag-field {
+    margin-bottom: 16px;
+}
+
+    .ag-field label {
+        display: block;
+        font-size: .85rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .ag-field input {
+        width: 100%;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 11px 12px;
+        font-size: .92rem;
+        background: #f9fafb;
+    }
+
+        .ag-field input:focus {
+            outline: none;
+            border-color: #111111;
+            background: #fff;
+        }
+
+/* ===== Card de confirmação (escuro, igual ao print) ===== */
+.ag-confirm-card {
+    background: #1c1c1c;
+    color: #fff;
+    border-radius: 14px;
+    margin: -28px;
+    padding: 36px 28px 28px;
+    text-align: center;
+}
+
+.ag-confirm-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 1.4rem;
+}
+
+.ag-confirm-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.ag-confirm-protocol {
+    color: #9ca3af;
+    font-size: .85rem;
+    margin-bottom: 24px;
+}
+
+.ag-confirm-divider {
+    border-top: 1px solid #333;
+    margin-bottom: 20px;
+}
+
+.ag-confirm-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    text-align: left;
+    padding: 14px 0;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+    .ag-confirm-row:last-of-type {
+        border-bottom: none;
+    }
+
+.ag-confirm-icon-sm {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+.ag-confirm-label {
+    color: #9ca3af;
+    font-size: .8rem;
+}
+
+.ag-confirm-value {
+    font-weight: 600;
+    font-size: .95rem;
+}
+
+.ag-btn-novo {
+    margin-top: 24px;
+    background: transparent;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 8px;
+    padding: 11px 22px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .ag-btn-novo:hover {
+        background: #2a2a2a;
+    }
+
+.d-none {
+    display: none !important;
+}
+.ag-erro {
+    color: #e02424;
+    background: #fdecec;
+    border: 1px solid #f5b5b5;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-top: 8px;
+    font-size: 0.9rem;
+}

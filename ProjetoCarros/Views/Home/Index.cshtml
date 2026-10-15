@@ -1,0 +1,235 @@
+ @{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Scripts {
+    <script src="~/js/splash.js" asp-append-version="true"></script>
+    <script src="~/js/CarroselVideo.js" asp-append-version="true"></script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/carrossel.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/frota-destaque.css" asp-append-version="true" />
+}
+
+<!-- Splash -->
+<div id="splash-overlay">
+    <div id="splash-logo">
+        <img src="~/images/logo.png" alt="Logo" />
+    </div>
+</div>
+
+<!-- Carrossel -->
+<div id="carouselHome" class="carousel slide" data-bs-ride="false">
+
+    <!-- Indicadores -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="3"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="4"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="5"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="6"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="7"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="8"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="9"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="10"></button>
+    </div>
+
+    <!-- Slides -->
+    <div class="carousel-inner">
+
+        <!-- SLIDE 0: VÍDEO -->
+        <div class="carousel-item active" data-bs-interval="false" id="slide-video">
+            <video id="carouselVideo"
+                   src="~/images/Porsche30seg.mp4"
+                   class="d-block w-100"
+                   muted
+                   playsinline>
+            </video>
+
+            <div class="slide-video-overlay">
+                <h1>Performance in the new Taycan</h1>
+                <p>Sinta a emoção de dirigir o futuro.</p>
+                <a asp-controller="Servicos" asp-action="Agendamentos" class="btn-test-drive">
+                    Agendar Test Drive
+                </a>
+            </div>
+        </div>
+
+        <!-- SLIDE 1 -->
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="~/images/1.jpg" class="d-block w-100" alt="BYD Dolphin">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Rimac Nevera</h5>
+                <p>⚡ Visual futurista e extremamente agressivo.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="~/images/2.jpg" class="d-block w-100" alt="BYD Dolphin Frente">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>
+                    Ferrari 296 GTB
+                </h5>
+                <p>🏎️ Design italiano compacto e esportivo.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="~/images/3.jpg" class="d-block w-100" alt="BYD King">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>
+                    Porsche Taycan Turbo GT
+                </h5>
+                <p>⚡ Elegância esportiva com desempenho de pista.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="~/images/4.jpg" class="d-block w-100" alt="BYD King Interior">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>
+                    Lamborghini Revuelto
+                </h5>
+                <p>🏎️ Aparência exótica e agressiva.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 5 -->
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="~/images/5.jpg" class="d-block w-100" alt="Interior BYD King">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>
+                    McLaren Artura
+                </h5>
+                <p>🏎️ Visual futurista com foco em performance.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 6 -->
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="~/images/6.jpg" class="d-block w-100" alt="BYD King Traseira">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>
+                    Audi RS e-tron GT
+                </h5>
+                <p>⚡ Design sofisticado e presença marcante.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 7 -->
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="~/images/7.jpg" class="d-block w-100" alt="Byd King Traseira">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>
+                    Ferrari SF90 Stradale
+                </h5>
+                <p>🏎️ Supercarro híbrido com visual de nave.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 8 -->
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="~/images/8.jpg" class="d-block w-100" alt="Byd Song Plus Lateral">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>
+                    Lucid Air Sapphire
+                </h5>
+                <p>⚡ Luxo moderno com linhas aerodinâmicas.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 9 -->
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="~/images/9.jpg" class="d-block w-100" alt="BYD Song Plus">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>
+                    Honda NSX Type S
+                </h5>
+                <p>
+                    🏎️ Elegância esportiva com toque tecnológico.
+
+                </p>
+            </div>
+        </div>
+
+        <!-- SLIDE 10 -->
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="~/images/10.jpg" class="d-block w-100" alt="BYD Song Plus Traseira">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>
+                    Hyundai N Vision 74
+                </h5>
+                <p>⚡ Estilo retrô-futurista inspirado em conceitos.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Controles -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Próximo</span>
+    </button>
+
+</div>
+
+<!-- Foco em Elétricos -->
+<section class="foco-eletricos-section">
+    <div class="container">
+        <h2 class="foco-eletricos-titulo">FOCO TOTAL EM MOBILIDADE ELÉTRICA</h2>
+        <p class="foco-eletricos-texto">
+            A ETEC Motors nasceu com um propósito claro: ser referência em veículos elétricos
+            e híbridos em São Paulo. Não somos apenas mais uma concessionária, somos especialistas
+            dedicados a entender e atender quem busca eficiência, tecnologia de ponta e zero
+            emissões no dia a dia.
+        </p>
+        <p class="foco-eletricos-texto">
+            Cada veículo da nossa frota passa por uma curadoria criteriosa, e nossa equipe é
+            treinada para te guiar com transparência por toda a jornada, da escolha do carro ao
+            suporte técnico especializado no pós-venda.
+        </p>
+    </div>
+</section>
+
+<!-- Cards Elétricos / Híbridos -->
+<section class="frota-cards-section">
+    <div class="row g-0">
+        <div class="col-12 col-md-6">
+            <div class="frota-card frota-card-eletrico">
+                <img src="~/images/carros/Carroeletrico.jpg" class="frota-card-img" alt="Carros 100% Elétricos">
+                <div class="frota-card-overlay">
+                    <span class="frota-card-tag">100% ELÉTRICOS</span>
+                    <h3 class="frota-card-titulo">Energia pura, zero emissões</h3>
+                    <p class="frota-card-desc">Tecnologia 100% elétrica para quem quer estar à frente do seu tempo.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="frota-card frota-card-hibrido">
+                <img src="~/images/carros/CarroHibrido.jpg" class="frota-card-img" alt="Carros Híbridos">
+                <div class="frota-card-overlay">
+                    <span class="frota-card-tag">HÍBRIDOS</span>
+                    <h3 class="frota-card-titulo">O melhor dos dois mundos</h3>
+                    <p class="frota-card-desc">Autonomia estendida e eficiência sem abrir mão da performance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="frota-cards-botoes">
+        <a asp-controller="Carros" asp-action="CarrosEletricos" class="btn-frota btn-frota-eletrico">Conferir Elétricos</a>
+        <a asp-controller="Carros" asp-action="CarrosHibridos" class="btn-frota btn-frota-hibrido">Conferir Híbridos</a>
+    </div>
+</section>
+

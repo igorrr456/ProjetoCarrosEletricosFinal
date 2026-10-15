@@ -1,0 +1,165 @@
+ <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProjetoCarros</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/splash.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Header.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProjetoCarros.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body style="font-family: 'Inter', sans-serif;">
+
+    <header>
+        <!-- DESKTOP NAV (igual ao original) -->
+        <nav class="navbar navbar-desktop navbar-expand-lg navbar-dark bg-black py-0" style="min-height: 75px; font-family: 'Inter', sans-serif;">
+            <div class="container justify-content-center">
+                <div class="navbar-collapse justify-content-center gap-3 d-flex" id="mainNav">
+
+                    <a asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="~/images/logo.png" alt="Logo" style="height: 65px; width: auto;" />
+                    </a>
+
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modelos</a>
+                            <ul class="dropdown-menu dropdown-menu-dark border-0 rounded-0 border-top border-white border-2 mt-0" style="background-color: black;">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Carros" asp-action="TodosModelos">Todos os Modelos</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Carros" asp-action="CarrosEletricos">Elétricos</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Carros" asp-action="CarrosHibridos">Híbrido</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Serviços</a>
+                            <ul class="dropdown-menu dropdown-menu-dark border-0 rounded-0 border-top border-white border-2 mt-0" style="background-color: black;">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Servicos" asp-action="Agendamentos">Agendamentos</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Servicos" asp-action="Carregamento">Carregamento</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Financiamento" asp-action="">Financiamento</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sobre</a>
+                            <ul class="dropdown-menu dropdown-menu-dark border-0 rounded-0 border-top border-white border-2 mt-0" style="background-color: black;">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Sobre" asp-action="QuemSomos">Quem Somos</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Sobre" asp-action="NossaMarca">Nossa Marca</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Sobre" asp-action="Contato">Contato</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item dropdown" style="list-style:none;">
+                            @if (User.FindFirst("NivelAcesso")?.Value == "Admin")
+                            {
+                                <a class="nav-link dropdown-toggle text-white px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Gerenciar</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link dropdown-toggle text-white px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Conta</a>
+                            }
+                            <ul class="dropdown-menu dropdown-menu-dark border-0 rounded-0 border-top border-white border-2 mt-0" style="background-color: black;">
+                                @if (User.FindFirst("NivelAcesso")?.Value == "Admin")
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Carros" asp-action="Gerenciar">Cadastrar</a></li>
+                                }
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Usuario" asp-action="configuracoes">Configurações</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Sair">Sair da Conta</a></li>
+                            </ul>
+                        </li>
+                        <span class="text-white" style="cursor: pointer; font-size: 14px;">Olá, @User.Identity.Name</span>
+                    }
+                    else
+                    {
+                        <a asp-controller="Usuario" asp-action="Logar" class="btn btn-outline-light btn-sm px-3">↗ Entrar</a>
+                    }
+                </div>
+            </div>
+        </nav>
+
+        <!-- MOBILE TOPBAR -->
+        <div class="navbar-mobile-bar">
+            <button class="navbar-toggler" id="mobileMenuToggle" aria-label="Abrir menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6" stroke-linecap="round" />
+                    <line x1="3" y1="12" x2="21" y2="12" stroke-linecap="round" />
+                    <line x1="3" y1="18" x2="21" y2="18" stroke-linecap="round" />
+                </svg>
+            </button>
+            <div class="mobile-logo">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo.png" alt="Logo" />
+                </a>
+            </div>
+            <!-- espaço direito para balancear (mesmo tamanho do botão) -->
+            <div style="width: 38px;"></div>
+        </div>
+
+        <!-- MOBILE MENU OVERLAY -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+
+            <div class="nav-section-label">Modelos</div>
+            <a class="mobile-nav-link sub" asp-area="" asp-controller="Carros" asp-action="TodosModelos">Todos os Modelos</a>
+            <a class="mobile-nav-link sub" asp-area="" asp-controller="Carros" asp-action="CarrosEletricos">Elétricos</a>
+            <a class="mobile-nav-link sub" asp-area="" asp-controller="Carros" asp-action="CarrosHibridos">Híbrido</a>
+
+            <div class="nav-section-label">Estoque</div>
+            <a class="mobile-nav-link sub" asp-area="" asp-controller="Carros" asp-action="Novos">Novos</a>
+            <a class="mobile-nav-link sub" asp-area="" asp-controller="Carros" asp-action="SemiNovos">Seminovos</a>
+
+            <div class="nav-section-label">Serviços</div>
+            <a class="mobile-nav-link sub" asp-area="" asp-controller="Servicos" asp-action="Agendamentos">Agendamentos</a>
+            <a class="mobile-nav-link sub" asp-area="" asp-controller="Servicos" asp-action="Financiamento">Financiamento</a>
+            <a class="mobile-nav-link sub" asp-area="" asp-controller="Servicos" asp-action="TestDrive">Test Drive</a>
+            <a class="mobile-nav-link sub" asp-area="" asp-controller="Servicos" asp-action="Carregamento">Carregamento</a>
+
+            <div class="nav-section-label">Sobre</div>
+            <a class="mobile-nav-link sub" asp-area="" asp-controller="Sobre" asp-action="QuemSomos">Quem Somos</a>
+            <a class="mobile-nav-link sub" asp-area="" asp-controller="Sobre" asp-action="NossaMarca">Nossa Marca</a>
+            <a class="mobile-nav-link sub" asp-area="" asp-controller="Sobre" asp-action="Contato">Contato</a>
+
+            <div class="mobile-divider"></div>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="mobile-user-info">Olá, @User.Identity.Name</div>
+                @if (User.FindFirst("NivelAcesso")?.Value == "Admin")
+                {
+                    <a class="mobile-nav-link sub" asp-area="" asp-controller="Carros" asp-action="Gerenciar">Cadastrar</a>
+                }
+                <a class="mobile-nav-link sub" asp-area="" asp-controller="Usuario" asp-action="configuracoes">Configurações</a>
+                <a class="mobile-nav-link sub" asp-area="" asp-controller="Usuario" asp-action="Sair">Sair da Conta</a>
+            }
+            else
+            {
+                <a asp-controller="Usuario" asp-action="Logar" class="mobile-login-btn">↗ Entrar</a>
+            }
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/splash.js" asp-append-version="true"></script>
+    <script src="~/js/Header.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Footer global -->
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <span class="site-footer__copy">&copy; 2026 - ProjetoCarros</span>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="site-footer__logo">
+                <img src="~/images/logo.png" alt="Logo ProjetoCarros" />
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>

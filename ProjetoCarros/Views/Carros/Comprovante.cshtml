@@ -1,0 +1,338 @@
+﻿@model ProjetoCarros.Models.Compra
+
+@{
+    ViewData["Title"] = "Comprovante de Compra";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+    body {
+        background-color: #0a0a0a;
+    }
+
+    .comprovante-wrap {
+        display: flex;
+        justify-content: center;
+        padding: 60px 20px;
+    }
+
+    .ticket {
+        max-width: 480px;
+        width: 100%;
+        font-family: inherit;
+    }
+
+    .ticket-top {
+        background: #0a0a0a;
+        border: 1px solid #fff;
+        border-radius: 8px 8px 0 0;
+        padding: 28px 28px 20px;
+        position: relative;
+    }
+
+    .ticket-top-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .ticket-label {
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #555;
+        margin: 0 0 6px;
+    }
+
+    .ticket-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0;
+        color: #fff;
+    }
+
+    .ticket-badge {
+        border: 1px solid #fff;
+        color: #fff;
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 20px;
+        white-space: nowrap;
+    }
+
+    .ticket-img {
+        width: 100%;
+        aspect-ratio: 16/8;
+        background: #141414;
+        border-radius: 6px;
+        margin: 20px 0;
+        overflow: hidden;
+    }
+
+        .ticket-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .ticket-img-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .ticket-info-table {
+        width: 100%;
+        font-size: 13px;
+        border-collapse: collapse;
+    }
+
+        .ticket-info-table td {
+            padding: 5px 0;
+        }
+
+            .ticket-info-table td:first-child {
+                color: #666;
+            }
+
+            .ticket-info-table td:last-child {
+                text-align: right;
+                color: #fff;
+            }
+
+    .ticket-tear {
+        background: #0a0a0a;
+        border-left: 1px solid #fff;
+        border-right: 1px solid #fff;
+        border-bottom: 1px dashed #333;
+        height: 0;
+        position: relative;
+    }
+
+        .ticket-tear::before,
+        .ticket-tear::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 20px;
+            height: 20px;
+            background: #0a0a0a;
+            border-radius: 50%;
+        }
+
+        .ticket-tear::before {
+            left: -10px;
+        }
+
+        .ticket-tear::after {
+            right: -10px;
+        }
+
+    .ticket-bottom {
+        background: #0a0a0a;
+        border: 1px solid #fff;
+        border-top: none;
+        border-radius: 0 0 8px 8px;
+        padding: 20px 28px 28px;
+    }
+
+    .ticket-retirada {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    .ticket-retirada-label {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #555;
+    }
+
+    .ticket-retirada-data {
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .ticket-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-top: 14px;
+        border-top: 1px solid #1e1e1e;
+    }
+
+    .ticket-total-label {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #555;
+    }
+
+    .ticket-total-valor {
+        font-size: 24px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .ticket-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .btn-baixar-pdf,
+    .btn-voltar-catalogo {
+        flex: 1;
+        border: none;
+        padding: 11px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .btn-baixar-pdf {
+        background: #fff;
+        color: #000;
+    }
+
+        .btn-baixar-pdf:hover {
+            background: #e0e0e0;
+        }
+
+    .btn-voltar-catalogo {
+        background: transparent;
+        color: #888;
+        border: 1px solid #333;
+    }
+
+        .btn-voltar-catalogo:hover {
+            color: #fff;
+            border-color: #555;
+        }
+</style>
+
+<div class="comprovante-wrap">
+    <div>
+        <div class="ticket" id="ticketParaPdf">
+
+            <div class="ticket-top">
+                <div class="ticket-top-header">
+                    <div>
+                        <p class="ticket-label">Comprovante de compra</p>
+                        <h1 class="ticket-title">@Model.NomeCarro</h1>
+                    </div>
+                    <span class="ticket-badge">Confirmado</span>
+                </div>
+
+                <div class="ticket-img">
+                    @if (!string.IsNullOrEmpty(Model.Imagem))
+                    {
+                        <img src="@Model.Imagem" alt="@Model.NomeCarro" />
+                    }
+                    else
+                    {
+                        <div class="ticket-img-placeholder">Sem imagem</div>
+                    }
+                </div>
+
+                <table class="ticket-info-table">
+                    <tr>
+                        <td>Cliente</td>
+                        <td>@Model.NomeCliente</td>
+                    </tr>
+                    <tr>
+                        <td>Código do pedido</td>
+                        <td>#CR-@Model.Id.ToString("D5")</td>
+                    </tr>
+                    <tr>
+                        <td>Categoria</td>
+                        <td>@Model.Categoria</td>
+                    </tr>
+                    <tr>
+                        <td>Data da compra</td>
+                        <td>@Model.DataCompra.ToString("dd MMM yyyy")</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="ticket-tear"></div>
+
+            <div class="ticket-bottom">
+                <div class="ticket-retirada">
+                    <span class="ticket-retirada-label">Retirar na loja em</span>
+                    <span class="ticket-retirada-data">@Model.DataRetirada.ToString("dd 'de' MMMM 'de' yyyy")</span>
+                </div>
+                <div class="ticket-total">
+                    <span class="ticket-total-label">Total a ser pago</span>
+                    <span class="ticket-total-valor">R$ @Model.Valor.ToString("N2")</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ticket-actions">
+            <a asp-controller="Carros" asp-action="TodosModelos" class="btn-voltar-catalogo">
+                Voltar ao catálogo
+            </a>
+            <button onclick="baixarPdf()" class="btn-baixar-pdf" id="btnBaixar">
+                Baixar PDF
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function baixarPdf() {
+            const elemento = document.getElementById('ticketParaPdf');
+            const botao = document.getElementById('btnBaixar');
+            botao.textContent = 'Gerando...';
+            var nomeArquivo = 'comprovante-@(Model.Id.ToString("D5")).pdf';
+
+
+            html2canvas(elemento, {
+                backgroundColor: '#0a0a0a',
+                scale: 2
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+
+                const larguraMm = 120;
+                const alturaMm = (canvas.height * larguraMm) / canvas.width;
+
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: [larguraMm, alturaMm]
+                });
+
+                pdf.addImage(imgData, 'PNG', 0, 0, larguraMm, alturaMm);
+                pdf.save(nomeArquivo);
+
+                botao.textContent = 'Baixar PDF';
+            });
+        }
+    </script>
+}

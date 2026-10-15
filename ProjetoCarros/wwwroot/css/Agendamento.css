@@ -1,0 +1,123 @@
+ .ag-hero {
+    background-color: #f2f3f5;
+    padding: 80px 0;
+}
+
+.ag-titulo {
+    font-family: "Arial Black", sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+    color: #111;
+    margin-bottom: 16px;
+}
+
+.ag-subtitulo {
+    font-size: 1.15rem;
+    color: #4b5563;
+    margin-bottom: 32px;
+}
+
+.ag-btn-agendar {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #111;
+    color: #fff;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+    .ag-btn-agendar:hover {
+        background-color: #3a7ef8;
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+    .ag-btn-agendar i {
+        transition: transform 0.2s ease;
+    }
+
+    .ag-btn-agendar:hover i {
+        transform: translateX(4px);
+    }
+
+.ag-imagem-wrapper {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.ag-imagem {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+/* ===================== PASSO A PASSO ===================== */
+.ag-passos-section {
+    background-color: #fff;
+    padding: 60px 0 80px;
+}
+
+.ag-passos-card {
+    background-color: #f6f7f9;
+    border-radius: 16px;
+    padding: 40px;
+}
+
+.ag-passo {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.ag-passo-numero {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #111;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ag-passo-titulo {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 6px;
+}
+
+.ag-passo-texto {
+    font-size: 0.92rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ===================== RESPONSIVO ===================== */
+@@media (max-width: 991.98px) {
+    .ag-titulo {
+        font-size: 2rem;
+    }
+
+    .ag-hero {
+        padding: 50px 0;
+    }
+
+    .ag-passos-card {
+        padding: 28px;
+    }
+}

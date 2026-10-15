@@ -1,0 +1,875 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+
+.navbar {
+    min-height: 80px;
+}
+
+.carousel-item img {
+    height: 700px;
+    object-fit: cover;
+    border-radius: 10px
+}
+
+
+
+/* =============================================
+           TOKENS DE DESIGN ? altere aqui para mudar o tema inteiro
+           ============================================= */
+:root {
+    --bg: #363636;
+    --bg-gerenciamento: #FFFAFA; /* fundo principal: quase preto */
+    --surface: #111111; /* superf?cie de cards/navbar */
+    --border: #222222; /* bordas sutis */
+    --border-hover: #444444; /* borda ao passar o mouse */
+    --text: #f0f0f0; /* texto principal */
+    --muted: #666666; /* texto secund?rio (labels, datas) */
+    --accent: #00ff88; /* verde neon ? o elemento "assinatura" do design */
+    --accent-dim: #00cc6a; /* verde mais escuro para hover */
+    --danger: #ff4444; /* vermelho para a??es destrutivas */
+    --warning: #ffaa00; /* amarelo para alertas */
+
+    --radius: 6px; /* borda arredondada padr?o */
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* =============================================
+           RESET E BASE
+           ============================================= */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: opacity .15s;
+}
+
+    a:hover {
+        opacity: .8;
+    }
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* =============================================
+           NAVBAR
+           O fundo ? #111 com uma borda inferior fina que cria
+           separa??o sem sombra pesada. O logo usa a fonte mono
+           com o ponto verde, que ? o "assinatura" repetido aqui.
+           ============================================= */
+.navbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-brand {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.5px;
+}
+    /* O ponto verde depois do nome ? o detalhe "assinatura" */
+    .navbar-brand span {
+        color: var(--accent);
+    }
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+}
+
+    .navbar-nav a {
+        color: var(--muted);
+        font-size: 0.875rem;
+        font-weight: 500;
+        padding: 0.4rem 0.75rem;
+        border-radius: var(--radius);
+        transition: color .15s, background .15s;
+    }
+
+        .navbar-nav a:hover {
+            color: var(--text);
+            background: var(--border);
+            opacity: 1;
+        }
+        /* Link ativo usa o accent como cor */
+        .navbar-nav a.active {
+            color: var(--accent);
+        }
+
+    /* Bot?o de logout/a??o pequena na navbar */
+    .navbar-nav .btn-nav-action {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.8rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: var(--radius);
+        cursor: pointer;
+        font-family: var(--font-body);
+        transition: border-color .15s, color .15s;
+    }
+
+        .navbar-nav .btn-nav-action:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+/* =============================================
+           CONTAINER
+           ============================================= */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* =============================================
+           CONTE?DO PRINCIPAL
+           ============================================= */
+main {
+    flex: 1;
+    padding: 2.5rem 0;
+}
+
+/* =============================================
+           TIPOGRAFIA
+           ============================================= */
+.page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.35rem;
+}
+/* Eyebrow: texto pequeno acima do t?tulo (ex: "// CAT?LOGO") */
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+/* =============================================
+           CARDS DE CARROS
+           Card com borda que acende no hover ? comunica
+           que o item ? clic?vel/interativo.
+           ============================================= */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.car-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color .2s, transform .2s;
+    display: flex;
+    flex-direction: column;
+}
+
+    .car-card:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-2px);
+    }
+
+/* Imagem do carro dentro do card */
+.car-card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: var(--border);
+}
+/* Placeholder quando n?o tem imagem */
+.car-card-img-placeholder {
+    width: 100%;
+    height: 180px;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+}
+
+.car-card-body {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.car-card-brand {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.car-card-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.car-card-price {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: auto;
+}
+
+/* =============================================
+           BADGES DE CATEGORIA
+           Cada tipo de powertrain tem uma cor diferente
+           para facilitar leitura r?pida.
+           ============================================= */
+.badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-BEV {
+    background: #00331a;
+    color: #00ff88;
+    border: 1px solid #00ff4420;
+}
+
+.badge-FCEV {
+    background: #002633;
+    color: #00ccff;
+    border: 1px solid #00ccff20;
+}
+
+.badge-PHEV {
+    background: #332200;
+    color: #ffaa00;
+    border: 1px solid #ffaa0020;
+}
+
+.badge-HEV {
+    background: #1a1a00;
+    color: #ddcc00;
+    border: 1px solid #ddcc0020;
+}
+
+.badge-MHEV {
+    background: #1a0033;
+    color: #aa88ff;
+    border: 1px solid #aa88ff20;
+}
+
+/* =============================================
+           BOT?ES
+           ============================================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1.2rem;
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: var(--font-body);
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background .15s, color .15s, border-color .15s, opacity .15s;
+    text-decoration: none;
+}
+/* Prim?rio: fundo neon ? para a a??o principal da tela */
+.btn-primary {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+}
+
+    .btn-primary:hover {
+        background: var(--accent-dim);
+        border-color: var(--accent-dim);
+        color: #000;
+        opacity: 1;
+    }
+
+/* Outline: s? borda ? para a??es secund?rias */
+.btn-outline {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border-hover);
+}
+
+    .btn-outline:hover {
+        border-color: var(--text);
+        color: var(--text);
+        opacity: 1;
+    }
+
+/* Danger: vermelho ? para deletar/a??o destrutiva */
+.btn-danger {
+    background: transparent;
+    color: var(--danger);
+    border-color: #ff444440;
+}
+
+    .btn-danger:hover {
+        background: #ff444415;
+        border-color: var(--danger);
+        opacity: 1;
+    }
+
+.btn-sm {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+}
+
+/* =============================================
+           FORMUL?RIOS
+           ============================================= */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font-mono);
+}
+
+.form-control {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    padding: 0.6rem 0.875rem;
+    font-size: 0.9rem;
+    font-family: var(--font-body);
+    transition: border-color .15s;
+    outline: none;
+}
+
+    .form-control:focus {
+        border-color: var(--accent);
+    }
+
+    .form-control::placeholder {
+        color: var(--muted);
+    }
+
+select.form-control option {
+    background: #fff;
+    color: #000;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Mensagem de erro de valida??o abaixo do campo */
+.field-validation-error {
+    display: block;
+    color: var(--danger);
+    font-size: 0.78rem;
+    margin-top: 0.3rem;
+}
+/* Erro geral do formul?rio (ex: "Email inv?lido") */
+.validation-summary-errors ul {
+    list-style: none;
+    background: #ff444415;
+    border: 1px solid #ff444440;
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+}
+
+    .validation-summary-errors ul li {
+        color: var(--danger);
+        font-size: 0.875rem;
+    }
+
+/* =============================================
+           CARD DE FORMUL?RIO (Login, Cadastro, etc.)
+           ============================================= */
+.form-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+/* =============================================
+           TABELA ADMIN
+           ============================================= */
+.table-wrapper {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+thead {
+    background: #161616;
+}
+
+th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: middle;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: #161616;
+}
+
+/* Linha de a??es (editar/deletar) */
+.td-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* =============================================
+           ALERTAS (TempData["Sucesso"])
+           ============================================= */
+.alert {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem;
+}
+
+.alert-success {
+    background: #00ff8815;
+    border: 1px solid #00ff8840;
+    color: var(--accent);
+}
+
+.alert-danger {
+    background: #ff444415;
+    border: 1px solid #ff444440;
+    color: var(--danger);
+}
+
+/* =============================================
+           FILTROS / TABS
+           ============================================= */
+.filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .15s;
+}
+
+    .filter-tab:hover, .filter-tab.active {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: #00ff8810;
+        opacity: 1;
+    }
+
+/* =============================================
+           ESTADO VAZIO (quando n?o h? carros)
+           ============================================= */
+.empty-state {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--muted);
+}
+
+    .empty-state .empty-icon {
+        font-family: var(--font-mono);
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        opacity: 0.3;
+    }
+
+/* =============================================
+           DIVISOR / HEADER DA SE??O
+           ============================================= */
+.section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* =============================================
+           LINHA DIVIS?RIA DECORATIVA
+           ============================================= */
+.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+}
+
+/* =============================================
+   FOOTER � estilo minimalista (inspirado Geely)
+   ============================================= */
+.site-footer {
+    background: #000;
+    border-top: 1px solid #1a1a1a;
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+}
+
+.site-footer__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.site-footer__copy {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: #555;
+    letter-spacing: 0.04em;
+}
+
+.site-footer__logo img {
+    height: 36px;
+    width: auto;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+    display: block;
+}
+
+.site-footer__logo:hover img {
+    opacity: 1;
+}
+
+/* =============================================
+           RESPONSIVO B?SICO
+           ============================================= */
+@@media (max-width: 640px) {
+    .navbar {
+        padding: 0 1rem;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    main {
+        padding: 1.5rem 0;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .page-title {
+        font-size: 1.4rem;
+    }
+}
+
+/*sessao das paginas de carros*/
+.page-header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid #1e1e1e;
+    margin-bottom: 40px;
+}
+
+.page-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+.carros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background-color: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    margin-bottom: 60px;
+}
+
+.carro-card {
+    background: #0f0f0f;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.2s;
+}
+
+    .carro-card:hover {
+        background: #141414;
+    }
+
+.card-img-wrap {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #111;
+    position: relative;
+}
+
+    .card-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(20%);
+        transition: transform 0.4s ease, filter 0.3s;
+    }
+
+.carro-card:hover .card-img-wrap img {
+    transform: scale(1.03);
+    filter: grayscale(0%);
+}
+
+.card-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2a2a2a;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.card-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid #333;
+}
+
+.card-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-marca {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #555;
+}
+
+.card-nome {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.card-desc {
+    font-size: 12px;
+    color: #444;
+    margin-top: 4px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-preco {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 12px;
+}
+
+    .card-preco span {
+        font-size: 12px;
+        font-weight: 400;
+        color: #444;
+    }
+
+/* Bot?es Alugar / Comprar */
+.card-btn {
+    display: flex;
+    border-top: 1px solid #1a1a1a;
+}
+
+.btn-alugar, .btn-comprar {
+    flex: 1;
+    padding: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    transition: background 0.15s, color 0.15s;
+}
+
+.btn-alugar {
+    background: #141414;
+    color: #888;
+    border-right: 1px solid #1a1a1a;
+}
+
+    .btn-alugar:hover {
+        background: #1a1a1a;
+        color: #fff;
+    }
+
+.btn-comprar {
+    background: #fff;
+    color: #000;
+}
+
+    .btn-comprar:hover {
+        background: #e0e0e0;
+        color: #000;
+    }
+
+.vazio {
+    text-align: center;
+    padding: 80px 20px;
+    border: 1px solid #1a1a1a;
+    color: #333;
+    margin-bottom: 60px;
+}
+
+    .vazio p {
+        font-size: 13px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+@@media (max-width: 400px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}

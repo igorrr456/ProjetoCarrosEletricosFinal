@@ -1,0 +1,21 @@
+﻿@model ConfirmarExclusaoViewModel
+
+<div style="width: 100%; display: flex; justify-content: center; padding: 2rem;">
+    <div style="background: black; border: 1px solid white; border-radius: 12px; padding: 2.5rem; width: 100%; max-width: 400px;">
+       <h2>Excluir Conta</h2>
+        <form asp-action="DeletarConta" method="post">
+
+            @Html.AntiForgeryToken()
+
+            <div>
+                <label class="text-center">Digite sua  senha para confirmar: </label>
+                <input asp-for="Senha" type="password" style="width: 100%; padding: 10px 14px; border: 1px solid #e4e4e7; border-radius: 8px; font-size: 14px; outline: none; box-sizing: border-box;"/>
+            </div>
+
+            <br/>
+
+            <button type="submit" class="btn btn-danger align-content-center">Excluir Conta</button>
+
+        </form>
+    </div>
+</div>

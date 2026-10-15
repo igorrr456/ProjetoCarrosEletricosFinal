@@ -1,0 +1,73 @@
+﻿.contact-hero {
+    background-image: url('/images/carros/Contato.webp');
+    background-size: cover;
+    background-position: center;
+    min-height: 620px;
+}
+
+.contact-hero-overlay {
+    background: linear-gradient(to right, rgba(0,0,0,0.82) 55%, transparent 100%);
+    z-index: 0;
+}
+
+.contact-hero-inner {
+    z-index: 1;
+    min-height: 620px;
+}
+
+.contact-title {
+    font-size: 4rem;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+}
+
+.contact-subtitle {
+    font-size: 1rem;
+    opacity: 0.65;
+}
+
+.contact-card {
+    padding: 1.75rem 1.5rem !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+}
+
+    .contact-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .contact-card .card-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #212529;
+    }
+
+    .contact-card .card-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.4rem;
+        text-transform: uppercase;
+        color: #6c757d;
+    }
+
+    .contact-card .card-value {
+        font-size: 1rem;
+        margin-bottom: 0.35rem;
+        color: #212529;
+    }
+
+    .contact-card .card-hint {
+        font-size: 0.82rem;
+        margin-bottom: 0;
+        color: #212529;
+    }
+
+.contact-form-section {
+    padding: 2rem 0;
+}
+
+.contact-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+}

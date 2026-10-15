@@ -1,0 +1,100 @@
+﻿@model ProjetoCarros.Models.Carro
+@*
+    VIEW: Carros/Editar.cshtml
+    MODEL: Carro — recebido com dados já preenchidos (BuscarPorId no GET)
+    FUNÇÃO: Formulário de edição. Os campos são pré-preenchidos com asp-for.
+
+    Diferença do Criar:
+    - Inclui @Html.HiddenFor(m => m.Id) para o controller saber qual carro atualizar
+    - Exibe a imagem atual e avisa que só muda se enviar uma nova
+    - O campo Imagem é opcional (IFormFile? imagem) — se vazio, mantém a atual
+*@
+@{
+    ViewData["Title"] = "Editar Carro";
+}
+
+<div style="margin-bottom:1.5rem">
+    <a asp-action="Gerenciar" style="color:var(--muted);font-size:0.875rem">← Voltar para Gerenciar</a>
+</div>
+
+<div class="eyebrow">// admin · editar</div>
+<h1 class="page-title" style="margin-bottom:1.75rem">Editar: @Model.Nome</h1>
+
+<form asp-action="Editar" method="post" enctype="multipart/form-data" style="max-width:640px">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Imagem" />
+
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div class="form-group">
+        <label class="form-label" asp-for="Nome">Nome do modelo</label>
+        <input class="form-control" asp-for="Nome" />
+        <span asp-validation-for="Nome" class="field-validation-error"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" asp-for="Marca">Marca</label>
+        <select class="form-control" asp-for="Marca">
+            @foreach (var marca in new[]{"BYD","Tesla","GWM","Geely","Chery","GAC Aion",
+            "Leapmotor","Jaecoo","Toyota","Volvo","Renault",
+            "Hyundai","Kia","BMW","Mercedes-Benz","Chevrolet",
+            "Fiat","Ford","Volkswagen"})
+            {
+                <!-- asp-for já marca o <option> correto como selected automaticamente -->
+                <option value="@marca">@marca</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" asp-for="Categoria">Categoria</label>
+        <select class="form-control" asp-for="Categoria">
+            <option value="BEV">BEV — Battery Electric</option>
+            <option value="FCEV">FCEV — Fuel Cell Electric</option>
+            <option value="PHEV">PHEV — Plug-in Hybrid</option>
+            <option value="HEV">HEV — Full Hybrid</option>
+            <option value="MHEV">MHEV — Mild Hybrid</option>
+        </select>
+        <span asp-validation-for="Categoria" class="field-validation-error"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" asp-for="Preco">Preço (R$)</label>
+        <input class="form-control" asp-for="Preco" type="number" step="0.01" min="0" />
+        <span asp-validation-for="Preco" class="field-validation-error"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" asp-for="Descricao">Descrição</label>
+        <textarea class="form-control" asp-for="Descricao"></textarea>
+    </div>
+
+    <!-- IMAGEM ATUAL + TROCA OPCIONAL -->
+    <div class="form-group">
+        <label class="form-label">Imagem</label>
+
+        @if (!string.IsNullOrEmpty(Model.Imagem))
+        {
+            <!-- Mostra a imagem atual em miniatura -->
+            <div style="margin-bottom:0.75rem">
+                <img src="@Model.Imagem" alt="Imagem atual"
+                     style="height:100px;border-radius:4px;border:1px solid var(--border)" />
+                <p style="color:var(--muted);font-size:0.75rem;margin-top:0.35rem">
+                    Imagem atual — envie uma nova abaixo para substituí-la.
+                </p>
+            </div>
+        }
+
+        <input class="form-control" type="file" name="imagem" accept="image/*" />
+        <p style="color:var(--muted);font-size:0.75rem;margin-top:0.4rem">
+            Deixe vazio para manter a imagem atual.
+        </p>
+    </div>
+
+    <div style="display:flex;gap:0.75rem;margin-top:1.75rem">
+        <button type="submit" class="btn btn-primary">Salvar alterações</button>
+        <a asp-action="Gerenciar" class="btn btn-outline">Cancelar</a>
+    </div>
+</form>
+

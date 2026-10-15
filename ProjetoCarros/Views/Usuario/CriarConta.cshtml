@@ -1,0 +1,63 @@
+﻿@model ProjetoCarros.Models.Usuario
+@{
+    ViewData["Title"] = "Criar Conta";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div style="min-height: calc(100vh - 130px); display: flex; align-items: center; justify-content: center;">
+    <div style="background: black; border: 1px solid white; border-radius: 12px; padding: 2.5rem; width: 100%; max-width: 400px;">
+
+        <h2 style="font-size: 1.4rem; font-weight: 700; color: white; margin: 0 0 0.25rem; text-align: center;">
+            Criar conta no Projeto Carros
+        </h2>
+        <p style="text-align: center; color: white; font-size: 14px; margin: 0 0 2rem;">
+            Preencha os dados abaixo para começar
+        </p>
+
+        <form asp-action="CriarConta" method="post">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="All" class="text-danger" style="font-size: 13px; margin-bottom: 1rem;"></div>
+
+            <div style="margin-bottom: 1rem;">
+                <label asp-for="Nome" style="font-size: 13px; font-weight: 600; color: white; display: block; margin-bottom: 6px;">Nome</label>
+                <input asp-for="Nome" type="text" placeholder="Seu nome completo"
+                       style="width: 100%; padding: 10px 14px; border: 1px solid #e4e4e7; border-radius: 8px; font-size: 14px; outline: none; box-sizing: border-box;" />
+                <span asp-validation-for="Nome" class="text-danger" style="font-size: 12px;"></span>
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <label asp-for="Email" style="font-size: 13px; font-weight: 600; color: white; display: block; margin-bottom: 6px;">E-mail</label>
+                <input asp-for="Email" type="email" placeholder="seu@email.com"
+                       style="width: 100%; padding: 10px 14px; border: 1px solid #e4e4e7; border-radius: 8px; font-size: 14px; outline: none; box-sizing: border-box;" />
+                <span asp-validation-for="Email" class="text-danger" style="font-size: 12px;"></span>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+                <label asp-for="Senha" style="font-size: 13px; font-weight: 600; color: white; display: block; margin-bottom: 6px;">Senha</label>
+                <input asp-for="Senha" type="password" placeholder="Mínimo 6 caracteres"
+                       style="width: 100%; padding: 10px 14px; border: 1px solid #e4e4e7; border-radius: 8px; font-size: 14px; outline: none; box-sizing: border-box;" />
+                <span asp-validation-for="Senha" class="text-danger" style="font-size: 12px;"></span>
+            </div>
+
+            <button type="submit"
+                    style="width: 100%; background: white; color: black; padding: 11px; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer;">
+                Cadastrar
+            </button>
+
+            <p style="text-align: center; font-size: 13px; color: #71717a; margin: 1.5rem 0 0;">
+                Já possui conta? Clique aqui para entrar na sua conta
+                <a asp-action="Logar" asp-controller="Usuario"
+                   style="color: white  ; font-weight: 600; text-decoration: none;">
+                    Entrar
+                </a>
+            </p>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
