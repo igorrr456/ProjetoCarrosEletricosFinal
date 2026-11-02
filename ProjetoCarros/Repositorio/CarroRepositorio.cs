@@ -16,6 +16,49 @@ namespace ProjetoCarros.Repositorio
             _env = env;
         }
 
+        //Criaçao de um carro
+        public void Criar(Carro carro, IFormFile? imagem)
+        {
+            string? imagemSalva = null;
+
+            try
+            {
+                // Salva a imagem, se uma foi enviada
+                imagemSalva = SalvarImagem(imagem);
+                carro.Imagem = imagemSalva;
+
+                using var conn = new MySqlConnection(_connectionString);
+                conn.Open();
+
+                using var cmd = new MySqlCommand("sp_cadastrar_carro", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@p_nome", carro.Nome);
+                cmd.Parameters.AddWithValue("@p_preco", carro.Preco);
+                cmd.Parameters.AddWithValue("@p_id_categoria", carro.IdCategoria);
+                cmd.Parameters.AddWithValue("@p_id_marca", carro.IdMarca);
+                cmd.Parameters.AddWithValue("@p_ano", carro.Ano);
+                cmd.Parameters.AddWithValue(
+                    "@p_descricao",
+                    (object?)carro.Descricao ?? DBNull.Value
+                );
+                cmd.Parameters.AddWithValue(
+                    "@p_imagem",
+                    (object?)carro.Imagem ?? DBNull.Value
+                );
+
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                // Se o cadastro falhar, remove a imagem que acabou de ser salva
+                if (imagemSalva != null)
+                    DeletarImagem(imagemSalva);
+
+                throw;
+            }
+        }
+
         //Parte da listagem de carros
 
         public List<Carro> ListarTodos()
@@ -77,49 +120,6 @@ namespace ProjetoCarros.Repositorio
             }
         }
 
-        //Criaçao de um carro
-        public void Criar(Carro carro, IFormFile? imagem)
-        {
-            string? imagemSalva = null;
-
-            try
-            {
-                // Salva a imagem, se uma foi enviada
-                imagemSalva = SalvarImagem(imagem);
-                carro.Imagem = imagemSalva;
-
-                using var conn = new MySqlConnection(_connectionString);
-                conn.Open();
-
-                using var cmd = new MySqlCommand("sp_cadastrar_carro", conn);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
-                cmd.Parameters.AddWithValue("@p_nome", carro.Nome);
-                cmd.Parameters.AddWithValue("@p_preco", carro.Preco);
-                cmd.Parameters.AddWithValue("@p_id_categoria", carro.IdCategoria);
-                cmd.Parameters.AddWithValue("@p_id_marca", carro.IdMarca);
-                cmd.Parameters.AddWithValue("@p_ano", carro.Ano);
-                cmd.Parameters.AddWithValue(
-                    "@p_descricao",
-                    (object?)carro.Descricao ?? DBNull.Value
-                );
-                cmd.Parameters.AddWithValue(
-                    "@p_imagem",
-                    (object?)carro.Imagem ?? DBNull.Value
-                );
-
-                cmd.ExecuteNonQuery();
-            }
-            catch
-            {
-                // Se o cadastro falhar, remove a imagem que acabou de ser salva
-                if (imagemSalva != null)
-                    DeletarImagemAntiga(imagemSalva);
-
-                throw;
-            }
-        }
-
         // Update dos carros existentes
         public void Editar(Carro carro, IFormFile? imagem)
         {
@@ -177,18 +177,17 @@ namespace ProjetoCarros.Repositorio
             {
                 // Se a atualização falhar, remove somente a imagem nova
                 if (imagemNova != null)
-                    DeletarImagemAntiga(imagemNova);
+                    DeletarImagem(imagemNova);
 
                 throw;
             }
 
             // Só remove a imagem antiga após confirmar a atualização
             if (atualizado && trocouImagem && imagemAntiga != null)
-                DeletarImagemAntiga(imagemAntiga);
+                DeletarImagem(imagemAntiga);
         }
 
         //exclusao do card de carros
-
         public void Deletar(int id)
         {
             using var conn = new MySqlConnection(_connectionString);
@@ -202,7 +201,6 @@ namespace ProjetoCarros.Repositorio
         }
 
         //Metodos privados para auxiliação
-
         //Evita a repetição do mapeamento reader
         private Carro MapearCarro(MySqlDataReader reader)
         {
@@ -253,7 +251,7 @@ namespace ProjetoCarros.Repositorio
             return "/imagens/carros/" + nomeArquivo;
         }
 
-        private void DeletarImagemAntiga(string? caminhoImagem)
+        private void DeletarImagem(string? caminhoImagem)
         {
             if (string.IsNullOrEmpty(caminhoImagem)) return;
 

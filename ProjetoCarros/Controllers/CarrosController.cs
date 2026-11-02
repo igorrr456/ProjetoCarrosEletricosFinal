@@ -26,32 +26,27 @@ namespace ProjetoCarros.Controllers
         }
         public IActionResult CarrosHibridos()
         {
-            //Filtra só os hibridos no c# mesmo
-            var hibridos = _carroRepositorio.ListarTodos()
-                .Where(c => c.Categoria == "PHEV" || c.Categoria == "HEV" || c.Categoria == "MHEV")
-                .ToList();
+            var hibridos = _carroRepositorio.ListarHibridos();
             return View(hibridos);
         }
         public IActionResult CarrosEletricos()
         {
-            var eletricos = _carroRepositorio.ListarTodos()
-                .Where(c => c.Categoria == "BEV" || c.Categoria == "FCEV")
-                .ToList();
+            var eletricos = _carroRepositorio.ListarEletricos();
             return View(eletricos);
         }
 
         //Area que apenas os adms vão poder gerenciar
-
         [Authorize]
         public IActionResult Gerenciar()
         {
             //verifica manualmente se é adm 
-            if (User.FindFirst("NivelAcesso")?.Value != "Admin")
+            if (User.FindFirst("Nivel")?.Value != "Admin")
                 return RedirectToAction("AcessoNegado");
 
             var carros = _carroRepositorio.ListarTodos();
                 return View(carros);
         }
+
         [Authorize]
         [HttpGet]
         public IActionResult Criar() => View();
@@ -60,14 +55,14 @@ namespace ProjetoCarros.Controllers
         [HttpPost]
         public IActionResult Criar( Carro model, IFormFile? imagem)
         {
-            if (User.FindFirst("NivelAcesso")?.Value != "Admin")
+            if (User.FindFirst("Nivel")?.Value != "Admin")
                 return RedirectToAction("AcessoNegado");
 
             if (!ModelState.IsValid)
-                
                 return View(model);
 
             _carroRepositorio.Criar(model, imagem);
+
             TempData["Sucesso"] = "Carro cadstrado com sucesso!";
             return RedirectToAction("Gerenciar");
         }
@@ -76,12 +71,14 @@ namespace ProjetoCarros.Controllers
         [HttpGet]
         public IActionResult Editar(int id)
         {
-            if (User.FindFirst("NivelAcesso")?.Value != "Admin")
+            if (User.FindFirst("Nivel")?.Value != "Admin")
                 return RedirectToAction("AcessoNegado");
 
             var carro = _carroRepositorio.BuscarPorId(id);
+
             if (carro == null)
                 return NotFound();
+
             return View(carro);
         }
 
@@ -90,7 +87,7 @@ namespace ProjetoCarros.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Editar(Carro model, IFormFile? imagem)
         {
-            if (User.FindFirst("NivelAcesso")?.Value != "Admin")
+            if (User.FindFirst("Nivel")?.Value != "Admin")
                 return RedirectToAction("AcessoNegado");
 
             ModelState.Remove("Imagem");
@@ -108,7 +105,7 @@ namespace ProjetoCarros.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Deletar(int id)
         {
-            if (User.FindFirst("NivelAcesso")?.Value != "Admin")
+            if (User.FindFirst("Nivel")?.Value != "Admin")
                 return RedirectToAction("AcessoNegado");
 
             _carroRepositorio.Deletar(id);
@@ -132,9 +129,6 @@ namespace ProjetoCarros.Controllers
             return View();
         }
 
-       
-
-
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -156,7 +150,6 @@ namespace ProjetoCarros.Controllers
                 {
                     diasAdicionados++;
                 }
-
             }
 
             var compra = new Compra
@@ -174,7 +167,6 @@ namespace ProjetoCarros.Controllers
 
             var compraCriada = _compraRepositorio.Criar(compra);
             return RedirectToAction("Comprovante", new { id = compraCriada.Id });
-
         }
 
 
