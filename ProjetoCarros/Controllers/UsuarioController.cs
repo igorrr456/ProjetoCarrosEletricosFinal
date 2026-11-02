@@ -15,8 +15,10 @@ namespace ProjetoCarros.Controllers
         {
             _usuarioRepositorio = usuarioRepositorio;
         }
+
         [HttpGet]
         public IActionResult Logar() => View();
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logar(Usuario model)
@@ -29,7 +31,7 @@ namespace ProjetoCarros.Controllers
                 {
                     new Claim(ClaimTypes.Name, usuario.Nome),
                     new Claim(ClaimTypes.Email, usuario.Email),
-                    new Claim("NivelAcesso",usuario.Nivel),
+                    new Claim("Nivel",usuario.Nivel),
                     new Claim("UsuarioId",usuario.Id.ToString())
                 };
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -103,12 +105,12 @@ namespace ProjetoCarros.Controllers
             return View(usuario);
         }
 
-        [HttpPost]
-
         // Faz com que a claims seja resetada com as novas informaçoes
-        public async Task<IActionResult> EditarPerfil(Usuario usuario)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditarPerfil(Usuario usuario, string? novaSenha)
         {
-            _usuarioRepositorio.Atualizar(usuario);
+            _usuarioRepositorio.Atualizar(usuario, novaSenha);
 
             var usuarioAtualizado =
                 _usuarioRepositorio.BuscarPorId(usuario.Id);
@@ -117,12 +119,12 @@ namespace ProjetoCarros.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme);
 
             var claims = new List<Claim>
-    {
-        new Claim(ClaimTypes.Name, usuarioAtualizado.Nome),
-        new Claim(ClaimTypes.Email, usuarioAtualizado.Email),
-        new Claim("NivelAcesso", usuarioAtualizado.Nivel),
-        new Claim("UsuarioId", usuarioAtualizado.Id.ToString())
-    };
+            {
+                new Claim(ClaimTypes.Name, usuarioAtualizado.Nome),
+                new Claim(ClaimTypes.Email, usuarioAtualizado.Email),
+                new Claim("Nivel", usuarioAtualizado.Nivel),
+                new Claim("UsuarioId", usuarioAtualizado.Id.ToString())
+            };
 
             var claimsIdentity = new ClaimsIdentity(
                 claims,
@@ -134,6 +136,7 @@ namespace ProjetoCarros.Controllers
 
             return RedirectToAction("Configuracoes");
         }
+
         // ---- LOGIN VIA AJAX (usado no passo 2 do agendamento de test-drive) ----
         [HttpPost]
         public async Task<IActionResult> LogarAjax([FromBody] Usuario model)
@@ -153,7 +156,7 @@ namespace ProjetoCarros.Controllers
     {
         new Claim(ClaimTypes.Name, usuario.Nome),
         new Claim(ClaimTypes.Email, usuario.Email),
-        new Claim("NivelAcesso", usuario.Nivel),
+        new Claim("Nivel", usuario.Nivel),
         new Claim("UsuarioId", usuario.Id.ToString())
     };
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
