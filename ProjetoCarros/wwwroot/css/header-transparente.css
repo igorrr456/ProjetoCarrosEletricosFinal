@@ -1,0 +1,67 @@
+/* Header transparente sobre o conteúdo */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: transparent;
+}
+
+.navbar-desktop {
+    background: transparent !important;
+    transition: background 0.3s ease;
+}
+
+.navbar-mobile-bar {
+    background: transparent !important;
+    transition: background 0.3s ease;
+}
+
+/* Remove a linha/borda/sombra abaixo do header */
+header,
+header .navbar,
+.navbar-desktop,
+.navbar-desktop > .container,
+.navbar-mobile-bar {
+    border: 0 !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+}
+
+    header::before,
+    header::after,
+    .navbar-desktop::before,
+    .navbar-desktop::after,
+    .navbar-mobile-bar::before,
+    .navbar-mobile-bar::after {
+        display: none !important;
+        content: none !important;
+    }
+
+    /* Dropdown continua escuro para ficar legível */
+    .navbar-desktop .dropdown-menu {
+        background-color: rgba(0, 0, 0, 0.9) !important;
+    }
+
+    /* Hover: header fica mais opaco */
+    header:hover .navbar-desktop,
+    header:hover .navbar-mobile-bar {
+        background: rgba(0, 0, 0, 0.65) !important;
+    }
+
+    /* Ao rolar a página, o header ganha fundo escuro */
+    header.scrolled {
+        position: fixed;
+    }
+
+        header.scrolled .navbar-desktop,
+        header.scrolled .navbar-mobile-bar {
+            background: rgba(0, 0, 0, 0.85) !important;
+        }
+
+        header.scrolled:hover .navbar-desktop,
+        header.scrolled:hover .navbar-mobile-bar {
+            background: rgba(0, 0, 0, 0.95) !important;
+        }
