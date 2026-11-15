@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/splash.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Header.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/header-transparente.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ProjetoCarros.styles.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
@@ -16,13 +17,13 @@
 <body style="font-family: 'Inter', sans-serif;">
 
     <header>
-        <!-- DESKTOP NAV (igual ao original) -->
-        <nav class="navbar navbar-desktop navbar-expand-lg navbar-dark bg-black py-0" style="min-height: 75px; font-family: 'Inter', sans-serif;">
+        <!-- DESKTOP NAV -->
+        <nav class="navbar navbar-desktop navbar-expand-lg navbar-dark py-0" style="min-height: 75px; font-family: 'Inter', sans-serif;">
             <div class="container justify-content-center">
                 <div class="navbar-collapse justify-content-center gap-3 d-flex" id="mainNav">
 
                     <a asp-area="" asp-controller="Home" asp-action="Index">
-                        <img src="~/images/logo.png" alt="Logo" style="height: 65px; width: auto;" />
+                        <img src="~/images/Logosemfundo.png" alt="Logo" style="height: 65px; width: auto;" />
                     </a>
 
                     <ul class="navbar-nav mb-2 mb-lg-0">
@@ -149,15 +150,85 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/splash.js" asp-append-version="true"></script>
     <script src="~/js/Header.js" asp-append-version="true"></script>
+
+    <!-- Header transparente: ganha fundo escuro ao rolar -->
+    <script>
+        (function () {
+            var header = document.querySelector('header');
+            function atualizar() {
+                header.classList.toggle('scrolled', window.scrollY > 50);
+            }
+            window.addEventListener('scroll', atualizar);
+            atualizar();
+        })();
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 
     <!-- Footer global -->
-    <footer class="site-footer">
-        <div class="site-footer__inner">
-            <span class="site-footer__copy">&copy; 2026 - ProjetoCarros</span>
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="site-footer__logo">
-                <img src="~/images/logo.png" alt="Logo ProjetoCarros" />
-            </a>
+    <footer class="bg-black text-white border-top border-secondary" data-bs-theme="dark">
+        <div class="container py-5">
+            <div class="row g-4">
+
+
+                <div class="col-lg-4">
+                    <a class="d-inline-block fw-bold fs-4 text-white text-decoration-none mb-3" asp-controller="Home" asp-action="Index">
+                        Etec Motors
+                    </a>
+                    <p class="text-white-50 mb-4">
+                        Criação e desenvolvimento de sites, lojas virtuais e sistemas web sob medida,
+                        com código limpo, desempenho e suporte de verdade.
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="#" class="btn btn-sm btn-instagram text-white fw-medium px-3">Instagram</a>
+                        <a href="#" class="btn btn-sm btn-linkedin text-white fw-medium px-3">LinkedIn</a>
+                        <a href="#" class="btn btn-sm btn-github text-white fw-medium px-3">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-2 offset-lg-1">
+                    <h6 class="text-uppercase small fw-semibold mb-3">Navegação</h6>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                        <li><a class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover" asp-controller="Home" asp-action="Index">Início</a></li>
+                        <li><a class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover" asp-controller="Sobre" asp-action="Sobre" asp-fragment="">Sobre nós</a></li>
+                        <li><a class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover" asp-controller="Orcamento" asp-action="Index" asp-fragment="">Orçamento</a></li>
+                        <li><a class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover" asp-controller="Contato" asp-action="Contato" asp-fragment="">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-2">
+                    <h6 class="text-uppercase small fw-semibold mb-3">Serviços</h6>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                        <li><a class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover" asp-controller="Home" asp-action="Index" asp-fragment="servicos">Sites institucionais</a></li>
+                        <li><a class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover" asp-controller="Home" asp-action="Index" asp-fragment="servicos">Lojas virtuais</a></li>
+                        <li><a class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover" asp-controller="Home" asp-action="Index" asp-fragment="servicos">Sistemas web</a></li>
+                        <li><a class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover" asp-controller="Home" asp-action="Index" asp-fragment="servicos">Manutenção</a></li>
+                        <li><a class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover" asp-controller="Home" asp-action="Index" asp-fragment="servicos">Reestruturação</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3" id="contato">
+                    <h6 class="text-uppercase small fw-semibold mb-3">Contato</h6>
+                    <ul class="list-unstyled mb-0 d-grid gap-2 text-white-50">
+                        <li>contato@EtecMotors.com.br</li>
+                        <li>(00) 00000-0000</li>
+                        <li>Cidade - SP, Brasil</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="border-secondary my-4">
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 small text-white-50">
+                <div class="text-center text-md-start">
+                    &copy; @DateTime.Now.Year Etec Motors. Todos os direitos reservados.<br class="d-md-none">
+                    <span class="ms-md-2">CNPJ 00.000.000/0001-00</span>
+                </div>
+                <div class="d-flex gap-3">
+                    <a class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover" asp-controller="Home" asp-action="Privacy">Política de Privacidade</a>
+                    <a class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover" href="#">Termos de Uso</a>
+                </div>
+            </div>
         </div>
     </footer>
 
