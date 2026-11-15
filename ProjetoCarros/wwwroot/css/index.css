@@ -10,6 +10,26 @@
     /* estilos existentes em splash.js/carrossel.css — mantidos lá */
 }
 
+/* ---------- Carrossel em tela cheia ---------- */
+#carouselHome,
+#carouselHome .carousel-inner,
+#carouselHome .carousel-item {
+    height: 100vh; /* fallback para navegadores antigos */
+    height: 100dvh; /* corrige a barra de endereço no celular */
+}
+
+    /* Vídeo e imagens preenchem o slide sem distorcer.
+   Esse seletor (com ID) tem prioridade sobre o
+   ".carousel-item img { height: 700px }" do site.css */
+    #carouselHome .carousel-item video,
+    #carouselHome .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* corta as sobras em vez de esticar */
+        object-position: center;
+        border-radius: 0;
+    }
+
 /* ---------- Slide de Vídeo (Slide 0) ---------- */
 #slide-video {
     position: relative;
@@ -17,7 +37,7 @@
 
 #carouselVideo {
     object-fit: cover;
-    max-height: 600px;
+    /* max-height: 600px; removido: era isso que impedia tela cheia */
 }
 
 /* Overlay de texto sobre o vídeo */
@@ -33,22 +53,22 @@
     padding: 1rem;
 }
 
-.slide-video-overlay h1 {
-    color: #fff;
-    font-size: clamp(1.6rem, 4vw, 3rem);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
-    margin-bottom: 0.4rem;
-}
+    .slide-video-overlay h1 {
+        color: #fff;
+        font-size: clamp(1.6rem, 4vw, 3rem);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+        margin-bottom: 0.4rem;
+    }
 
-.slide-video-overlay p {
-    color: rgba(255, 255, 255, 0.85);
-    font-size: clamp(0.95rem, 2vw, 1.2rem);
-    font-weight: 400;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
-    margin-bottom: 1.8rem;
-}
+    .slide-video-overlay p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: clamp(0.95rem, 2vw, 1.2rem);
+        font-weight: 400;
+        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+        margin-bottom: 1.8rem;
+    }
 
 /* Botão "Agendar Test Drive" */
 .btn-test-drive {
@@ -66,7 +86,7 @@
     transition: background 0.25s, color 0.25s;
 }
 
-.btn-test-drive:hover {
-    background: #fff;
-    color: #000;
-}
+    .btn-test-drive:hover {
+        background: #fff;
+        color: #000;
+    }
