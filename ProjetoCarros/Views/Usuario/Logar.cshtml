@@ -1,12 +1,12 @@
 ﻿@model ProjetoCarros.Models.Usuario
 @{
     ViewData["Title"] = "Logar";
-    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div style="width: 100%; display: flex; justify-content: center; padding: 2rem;">
+<div style="min-height: 100vh; min-height: 100dvh; width: 100%; display: flex; justify-content: center; align-items: center; padding: 6rem 1rem 2rem; box-sizing: border-box;">
     <div style="background: black; border: 1px solid white; border-radius: 12px; padding: 2.5rem; width: 100%; max-width: 400px;">
         <h2 style="font-size: 1.4rem; font-weight: 700; color: white; margin: 0 0 0.25rem; text-align: center;">
-            Entrar no Projeto Carros
+            Entrar no Etec Motors
         </h2>
         <p style="text-align: center; color: white; font-size: 14px; margin: 0 0 2rem;">
             Bem-vindo de volta
@@ -33,7 +33,7 @@
             <p style="text-align: center; font-size: 13px; color: #71717a; margin: 1.5rem 0 0;">
                 Não possui conta?
                 <a asp-action="CriarConta" asp-controller="Usuario"
-                       style="color: white; font-weight: 600; text-decoration: none;">
+                   style="color: white; font-weight: 600; text-decoration: none;">
                     Criar conta
                 </a>
             </p>
