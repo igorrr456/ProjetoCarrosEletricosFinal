@@ -34,7 +34,7 @@ html {
            TOKENS DE DESIGN ? altere aqui para mudar o tema inteiro
            ============================================= */
 :root {
-    --bg: #363636;
+    --bg: #000000;
     --bg-gerenciamento: #FFFAFA; /* fundo principal: quase preto */
     --surface: #111111; /* superf?cie de cards/navbar */
     --border: #222222; /* bordas sutis */
