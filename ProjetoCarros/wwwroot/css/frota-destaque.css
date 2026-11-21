@@ -32,9 +32,8 @@
    =========================== */
 .frota-cards-section {
     background-color: #0d0d0d;
-    padding: 60px 0 70px 0;
+    padding: 0 0 70px 0; /* tira o espaço de cima, mantém o de baixo pros botões */
 }
-
 .frota-card {
     position: relative;
     height: 560px;
