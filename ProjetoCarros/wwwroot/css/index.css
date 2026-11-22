@@ -90,3 +90,51 @@
         background: #fff;
         color: #000;
     }
+    /* ---------- Foco em Mobilidade Elétrica ---------- */
+.foco-eletricos-section {
+    background: #fff;          /* o body é preto, então o branco precisa ser explícito */
+    color: #0f0f0f;
+    padding: 5rem 0;
+}
+
+.foco-eletricos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.foco-eletricos-titulo {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem;
+}
+
+.foco-eletricos-texto {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #222;
+    margin-bottom: 1rem;
+}
+
+.foco-eletricos-midia {
+    aspect-ratio: 4 / 3;
+    background: #e4e5e7;       /* cinza do placeholder enquanto não tem foto */
+    overflow: hidden;
+}
+
+.foco-eletricos-midia img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .foco-eletricos-section { padding: 3rem 0; }
+    .foco-eletricos-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
