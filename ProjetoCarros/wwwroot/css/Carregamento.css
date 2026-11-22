@@ -1,9 +1,13 @@
-﻿
-.carregamento-intro-section {
+﻿.carregamento-intro-section {
     background-color: #ffffff;
-    padding: 60px 20px 70px 20px;
+    padding: 80px 20px;
 }
 
+@media (max-width: 991.98px) {
+    .carregamento-intro-section {
+        padding: 50px 20px;
+    }
+}
 .carregamento-titulo {
     text-align: center;
     font-size: 2.2rem;
