@@ -210,32 +210,36 @@
 
 <!-- Cards Elétricos / Híbridos -->
 <section class="frota-cards-section">
-    <div class="row g-0">
-        <div class="col-12 col-md-6">
-            <div class="frota-card frota-card-eletrico">
-                <img src="~/images/carros/Carroeletrico.jpg" class="frota-card-img" alt="Carros 100% Elétricos">
-                <div class="frota-card-overlay">
-                    <span class="frota-card-tag">100% ELÉTRICOS</span>
-                    <h3 class="frota-card-titulo">Energia pura, zero emissões</h3>
-                    <p class="frota-card-desc">Tecnologia 100% elétrica para quem quer estar à frente do seu tempo.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6">
-            <div class="frota-card frota-card-hibrido">
-                <img src="~/images/carros/CarroHibrido.jpg" class="frota-card-img" alt="Carros Híbridos">
-                <div class="frota-card-overlay">
-                    <span class="frota-card-tag">HÍBRIDOS</span>
-                    <h3 class="frota-card-titulo">O melhor dos dois mundos</h3>
-                    <p class="frota-card-desc">Autonomia estendida e eficiência sem abrir mão da performance.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="frota-grid">
 
-    <div class="frota-cards-botoes">
-        <a asp-controller="Carros" asp-action="CarrosEletricos" class="btn-frota btn-frota-eletrico">Conferir Elétricos</a>
-        <a asp-controller="Carros" asp-action="CarrosHibridos" class="btn-frota btn-frota-hibrido">Conferir Híbridos</a>
+        <article class="frota-card frota-card-eletrico">
+            <img src="~/images/carros/Carroeletrico.jpg" class="frota-card-img" alt="Carros 100% Elétricos">
+            <div class="frota-card-overlay"></div>
+            <div class="frota-card-conteudo">
+                <span class="frota-card-tag">100% Elétricos</span>
+                <h3 class="frota-card-titulo">Energia pura, zero emissões</h3>
+                <p class="frota-card-desc">Tecnologia 100% elétrica para quem quer estar à frente do seu tempo.</p>
+                <a asp-controller="Carros" asp-action="CarrosEletricos" class="btn-frota">
+                    Conferir Elétricos
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+                </a>
+            </div>
+        </article>
+
+        <article class="frota-card frota-card-hibrido">
+            <img src="~/images/carros/CarroHibrido.jpg" class="frota-card-img" alt="Carros Híbridos">
+            <div class="frota-card-overlay"></div>
+            <div class="frota-card-conteudo">
+                <span class="frota-card-tag">Híbridos</span>
+                <h3 class="frota-card-titulo">O melhor dos dois mundos</h3>
+                <p class="frota-card-desc">Autonomia estendida e eficiência sem abrir mão da performance.</p>
+                <a asp-controller="Carros" asp-action="CarrosHibridos" class="btn-frota">
+                    Conferir Híbridos
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+                </a>
+            </div>
+        </article>
+
     </div>
 </section>
 
