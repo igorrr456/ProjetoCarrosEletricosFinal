@@ -1,0 +1,114 @@
+.logar-section {
+    background-color: #111111;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    padding: 120px 20px 80px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 991.98px) {
+    .logar-section {
+        padding: 100px 20px 50px;
+    }
+}
+
+.logar-titulo {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin-bottom: 24px;
+}
+
+.logar-subtexto {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: #d4d4d4;
+}
+
+.logar-form {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.logar-campo {
+    margin-bottom: 20px;
+}
+
+.logar-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.logar-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ffffff;
+    border-radius: 0;
+    background-color: #111111;
+    color: #ffffff;
+    font-size: 0.95rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+    .logar-input::placeholder {
+        color: #8a8a8a;
+    }
+
+    .logar-input:focus {
+        box-shadow: 0 0 0 2px #ffffff;
+    }
+
+.logar-botao {
+    width: 100%;
+    margin-top: 10px;
+    padding: 13px;
+    border: 1px solid #ffffff;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #111111;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+    .logar-botao:hover {
+        background-color: #111111;
+        color: #ffffff;
+    }
+
+.logar-rodape {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #c4c4c4;
+    margin: 24px 0 0;
+}
+
+.logar-link {
+    color: #ffffff;
+    font-weight: 800;
+    text-decoration: underline;
+}
+
+.logar-erro {
+    font-size: 0.8rem;
+}
+
+@media (max-width: 767px) {
+    .logar-titulo {
+        font-size: 1.7rem;
+    }
+}
