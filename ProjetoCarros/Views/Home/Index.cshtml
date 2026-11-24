@@ -242,4 +242,61 @@
 
     </div>
 </section>
+<!-- Veículos em Destaque (cole no final da Index.cshtml, depois da section frota-cards) -->
+<section class="destaques-section">
+    <div class="container">
+
+        <div class="destaques-header">
+            <h2 class="destaques-titulo">Veículos em Destaque</h2>
+            <p class="destaques-subtitulo">Uma seleção da nossa frota, pronta para test drive.</p>
+        </div>
+
+        <div class="destaques-grid">
+
+            <article class="destaque-card">
+                <div class="destaque-midia">
+                    @* Troque pelo: <img src="~/images/carros/modelo1.jpg" alt="[MODELO 1]" /> *@
+                    [ foto do veículo ]
+                </div>
+                <div class="destaque-corpo">
+                    <span class="destaque-tag destaque-tag-eletrico">100% Elétrico</span>
+                    <h3 class="destaque-nome">[MODELO 1]</h3>
+                    <p class="destaque-info">Autonomia: [XXX] km<br />A partir de [PREÇO]</p>
+                    <a asp-controller="Carros" asp-action="CarrosEletricos" class="destaque-btn">Ver detalhes</a>
+                </div>
+            </article>
+
+            <article class="destaque-card">
+                <div class="destaque-midia">[ foto do veículo ]</div>
+                <div class="destaque-corpo">
+                    <span class="destaque-tag destaque-tag-eletrico">100% Elétrico</span>
+                    <h3 class="destaque-nome">[MODELO 2]</h3>
+                    <p class="destaque-info">Autonomia: [XXX] km<br />A partir de [PREÇO]</p>
+                    <a asp-controller="Carros" asp-action="CarrosEletricos" class="destaque-btn">Ver detalhes</a>
+                </div>
+            </article>
+
+            <article class="destaque-card">
+                <div class="destaque-midia">[ foto do veículo ]</div>
+                <div class="destaque-corpo">
+                    <span class="destaque-tag destaque-tag-hibrido">Híbrido</span>
+                    <h3 class="destaque-nome">[MODELO 3]</h3>
+                    <p class="destaque-info">Autonomia: [XXX] km<br />A partir de [PREÇO]</p>
+                    <a asp-controller="Carros" asp-action="CarrosHibridos" class="destaque-btn">Ver detalhes</a>
+                </div>
+            </article>
+
+            <article class="destaque-card">
+                <div class="destaque-midia">[ foto do veículo ]</div>
+                <div class="destaque-corpo">
+                    <span class="destaque-tag destaque-tag-hibrido">Híbrido</span>
+                    <h3 class="destaque-nome">[MODELO 4]</h3>
+                    <p class="destaque-info">Autonomia: [XXX] km<br />A partir de [PREÇO]</p>
+                    <a asp-controller="Carros" asp-action="CarrosHibridos" class="destaque-btn">Ver detalhes</a>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
 
