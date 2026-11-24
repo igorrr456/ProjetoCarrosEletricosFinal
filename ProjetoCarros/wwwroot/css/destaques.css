@@ -1,0 +1,139 @@
+/* ================================================
+   Veículos em Destaque
+   Salve em wwwroot/css/destaques.css e adicione na
+   @section Styles da Index.cshtml:
+   <link rel="stylesheet" href="~/css/destaques.css" asp-append-version="true" />
+   ================================================ */
+
+.destaques-section {
+    background: #0b0b0b;
+    color: #fff;
+    padding: 4rem 0 5rem;
+}
+
+.destaques-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.destaques-titulo {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+
+.destaques-subtitulo {
+    font-size: 0.9rem;
+    color: #9a9a9a;
+}
+
+.destaques-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+}
+
+.destaque-card {
+    background: #161616;
+    border: 1px solid #222;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+    .destaque-card:hover {
+        border-color: #444;
+        transform: translateY(-3px);
+    }
+
+/* Área da foto (placeholder cinza até ter imagem) */
+.destaque-midia {
+    aspect-ratio: 16 / 10;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 0.75rem;
+    overflow: hidden;
+}
+
+    .destaque-midia img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.destaque-corpo {
+    padding: 1.1rem 1.1rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.destaque-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+
+.destaque-tag-eletrico {
+    color: #00bfa5;
+}
+
+.destaque-tag-hibrido {
+    color: #d4af37;
+}
+
+.destaque-nome {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.destaque-info {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #aaa;
+    margin-bottom: 1.1rem;
+}
+
+.destaque-btn {
+    margin-top: auto;
+    align-self: flex-start;
+    padding: 0.5rem 1.1rem;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s;
+}
+
+    .destaque-btn:hover {
+        background: #fff;
+        color: #000;
+        opacity: 1;
+    }
+
+@media (max-width: 992px) {
+    .destaques-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .destaques-section {
+        padding: 3rem 0;
+    }
+
+    .destaques-grid {
+        grid-template-columns: 1fr;
+    }
+}
